@@ -2,25 +2,33 @@
 #include <string.h>
 
 int main(void) {
-    char name[20] = "Ada";
-    char copy[20];
-    char expected[] = "Ada";
+    char first_name[] = "Feaveya";
+    char last_name[] = "Kheawprae";
+    char full_name[50];
+    char copied_name[20];
+    char expected[] = "Freya Theprae";
 
-    /* String ใน C คือ char array ที่ลงท้ายด้วย '\0' */
-    printf("ชื่อ: %s\n", name);
-    printf("ความยาว: %zu ตัวอักษร\n", strlen(name));
+    /* strlen(str): นับจำนวนอักขระ โดยไม่นับ '\0' */
+    printf("strlen(first_name) = %zu\n", strlen(first_name));
 
-    strcpy(copy, name); /* ปลายทางต้องมีพื้นที่เพียงพอ */
-    printf("สำเนา: %s\n", copy);
+    /* strcpy(dest, src): คัดลอก src ไปยัง dest
+       dest ต้องมีพื้นที่เพียงพอสำหรับข้อความและ '\0' */
+    strcpy(copied_name, first_name);
+    printf("หลัง strcpy: %s\n", copied_name);
 
-    if (strcmp(name, expected) == 0) {
-        printf("name และ expected มีข้อความเหมือนกัน\n");
+    /* strcat(dest, src): ต่อ src ไว้ท้าย dest
+       จึงต้องกำหนดค่าเริ่มต้นให้ dest เป็น string ก่อน */
+    strcpy(full_name, first_name);
+    strcat(full_name, " ");
+    strcat(full_name, last_name);
+    printf("หลัง strcat: %s\n", full_name);
+
+    /* strcmp(s1, s2): คืนค่า 0 เมื่อข้อความเหมือนกัน */
+    if (strcmp(full_name, expected) == 0) {
+        printf("strcmp: ข้อความเหมือนกัน\n");
     } else {
-        printf("name และ expected มีข้อความต่างกัน\n");
+        printf("strcmp: ข้อความต่างกัน\n");
     }
-
-    name[0] = 'a'; /* เข้าถึงอักขระตัวแรกเหมือนอาร์เรย์ทั่วไป */
-    printf("หลังแก้ไขอักขระตัวแรก: %s\n", name);
 
     return 0;
 }
